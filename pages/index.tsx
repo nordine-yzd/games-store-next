@@ -12,32 +12,27 @@ const Home: NextPage = () => {
         <main className={styles.main}>
           <h1 className={styles.title}>Welcome to Video Games Center</h1>
 
-          <p className={styles.description}>
+          {/* <p className={styles.description}>
             Get started by editing{" "}
             <code className={styles.code}>pages/index.tsx</code>
-          </p>
+          </p> */}
 
           <div className={styles.grid}>
-            <Link href="./games/allgames">
+            <Link href="/games/allgames">
               <a className={styles.card}>
                 <h2>All Games &rarr;</h2>
-                <p>Find in-depth information about Next.js features and API.</p>
               </a>
             </Link>
 
-            <Link href="./platforms/allplatforms">
+            <Link href="/platforms/allplatforms">
               <a className={styles.card}>
                 <h2>All Platforms</h2>
-                <p>
-                  Learn about Next.js in an interactive course with quizzes!
-                </p>
               </a>
             </Link>
 
-            <Link href="./genres/genre">
+            <Link href="/genres/allgenres">
               <a className={styles.card}>
                 <h2>All Genres</h2>
-                <p>Discover and deploy boilerplate example Next.js projects.</p>
               </a>
             </Link>
           </div>

@@ -59,7 +59,7 @@ const AllPlatforms: React.FC<{ games: AllPlatformsTyped }> = ({ games }) => {
                 </Link>
               ) : (
                 <Link key={element.id} href="/">
-                  <a className={styles.platform}>
+                  <a className={styles.card}>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>
                       {/* <Image

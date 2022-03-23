@@ -6,13 +6,22 @@ import { Layout } from "../../components/layout";
 
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async (request) => {
-  const response = await fetch(`http://videogame-api.fly.dev/games`);
+  const response = await fetch(`http://videogame-api.fly.dev/games?page=2`);
   const joke = await response.json();
+  // console.log(request.params);
+  console.log("ici");
 
+  console.log(request.params);
+  console.log(typeof request.params);
+  const reqPa = await JSON.stringify(request.params);
+  const slug = JSON.stringify(request.params);
+  // const slug = reqParam.slice(12, reqParam.length - 2);
+  // console.log(reqParam);
   // Pass data to the page via props
   return {
     props: {
       joke: joke,
+      slug: { slug },
     },
   };
 };
@@ -34,8 +43,17 @@ type AllGamesTyped = {
     };
   }[];
 };
+type SlugTyped = {};
+const AllGames: React.FC<{ joke: AllGamesTyped; slug: SlugTyped }> = (
+  { joke },
+  { slug }
+) => {
+  console.log("here");
+  // console.log(joke);
 
-const AllGames: React.FC<{ joke: AllGamesTyped }> = ({ joke }) => {
+  console.log(slug);
+  console.log("after here");
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -75,6 +93,12 @@ const AllGames: React.FC<{ joke: AllGamesTyped }> = ({ joke }) => {
             })}
           </div>
         </main>
+        <Link href="/">
+          <button>previous</button>
+        </Link>
+        <Link href="/">
+          <button>next</button>
+        </Link>
       </div>
     </Layout>
   );
