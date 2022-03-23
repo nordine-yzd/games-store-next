@@ -1,6 +1,8 @@
 import { GetServerSideProps } from "next";
 import styles from "../../styles/Home.module.css";
 import Link from "next/link";
+import Image from "next/image";
+import { Layout } from "../../components/layout";
 
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async (request) => {
@@ -11,7 +13,6 @@ export const getServerSideProps: GetServerSideProps = async (request) => {
 
   const response = await fetch(`http://videogame-api.fly.dev/games`);
   const joke = await response.json();
-  // console.log(joke.games[0]);
 
   // Pass data to the page via props
   return {
@@ -21,44 +22,69 @@ export const getServerSideProps: GetServerSideProps = async (request) => {
     },
   };
 };
+
 type AllGamesTyped = {
   games: {
+    id: string;
+    name: string;
+    slug: string;
     category: string;
+    platforms: {
+      id: string;
+      name: string;
+    }[];
     cover: {
       height: string | number;
       url: string;
       width: string | number;
     };
-    id: string;
-    name: string;
-    platforms: {
-      id: string;
-      name: string;
-    }[];
-    slug: string;
-  };
-}[];
+  }[];
+};
 
 const AllGames: React.FC<{ joke: AllGamesTyped }> = ({ joke }) => {
-  console.log(joke);
+  // console.log(joke.games[0].name);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.grid}>
-        <Link href="/">
-          <a>
-            <div className={styles.card}>
-              <h2>
-                {"Hello "}
-                {/* {joke[0].name} */}
-                {/* {console.log(joke.games[0])} */}
-                &rarr;
-              </h2>
-            </div>
-          </a>
-        </Link>
+    <Layout>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <div className={styles.grid}>
+            {joke.games.map((element) => {
+              // console.log(element.cover);
+              return element.cover ? (
+                <Link key={element.id} href="/">
+                  <a>
+                    <div className={styles.card}>
+                      <h2>{element.name}</h2>
+                      <Image
+                        src={element.cover.url}
+                        alt="cover img"
+                        width={250}
+                        height={300}
+                      />
+                    </div>
+                  </a>
+                </Link>
+              ) : (
+                <Link key={element.id} href="/">
+                  <a>
+                    <div className={styles.card}>
+                      <h2>{element.name}</h2>
+                      <Image
+                        src="/no-cover-game.png"
+                        alt="nocover img"
+                        width={250}
+                        height={300}
+                      />
+                    </div>
+                  </a>
+                </Link>
+              );
+            })}
+          </div>
+        </main>
       </div>
-    </div>
+    </Layout>
   );
 };
 
