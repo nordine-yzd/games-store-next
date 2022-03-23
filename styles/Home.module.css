@@ -114,3 +114,8 @@
     flex-direction: column;
   }
 }
+
+.platform {
+  width: 250;
+  height: 300;
+}

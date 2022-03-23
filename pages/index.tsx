@@ -25,7 +25,7 @@ const Home: NextPage = () => {
               </a>
             </Link>
 
-            <Link href="./genres/genre">
+            <Link href="./platforms/allplatforms">
               <a className={styles.card}>
                 <h2>All Platforms</h2>
                 <p>
