@@ -25,17 +25,19 @@ type AllGamesTyped = {
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async (request) => {
   const reqParam = JSON.stringify(request.params);
-  const slug = reqParam.slice(15, reqParam.length - 3);
-  // let slug: number = parseInt(slugString);
-  console.log("---" + slug + "---");
+  const slug = reqParam.slice(15, reqParam.length - 4);
+  const SlugPageString = reqParam.slice(52, reqParam.length - 2);
+  let slugPage: number = parseInt(SlugPageString);
+  console.log(slugPage);
+  console.log(reqParam);
 
-  // const reg = new RegExp("^[0-9]*$");
-  // if (reg.test(slugString) == false) {
-  //   slug = 1;
-  // }
+  const reg = new RegExp("^[0-9]*$");
+  if (reg.test(SlugPageString) == false) {
+    slugPage = 1;
+  }
 
   const response = await fetch(
-    `http://videogame-api.fly.dev/games/genres/137bcfbe-be08-0b36-b66e-1bfef14ca49a?page=1`
+    `http://videogame-api.fly.dev/games/genres/${slug}?page=${slugPage}`
   );
   const game = await response.json();
   console.log(game);
@@ -44,17 +46,20 @@ export const getServerSideProps: GetServerSideProps = async (request) => {
   return {
     props: {
       game: game,
+      slug: slug,
+      slugPage: slugPage,
     },
   };
 };
 
-const AllGames: React.FC<{ game: AllGamesTyped }> = ({ game }) => {
-  // <div>
-  //   {console.log(game)}
-  //   <Link href={`/`} passHref>
-  //     <button></button>
-  //   </Link>
-  // </div>
+const AllGames: React.FC<{
+  game: AllGamesTyped;
+  slug: string;
+  slugPage: number;
+}> = ({ game, slug, slugPage }) => {
+  const next = slugPage + 1;
+  const previous = slugPage - 1;
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -92,22 +97,22 @@ const AllGames: React.FC<{ game: AllGamesTyped }> = ({ game }) => {
               );
             })}
           </div>
-          {/* {slug === 1 ? (
-              <div>
-                <Link href={`/games/${next}`} passHref>
-                  <button>next</button>
-                </Link>
-              </div>
-            ) : (
-              <div>
-                <Link href={`/games/${previous}`} passHref>
-                  <button>previous</button>
-                </Link>
-                <Link href={`/games/${next}`} passHref>
-                  <button>next</button>
-                </Link>
-              </div>
-            )} */}
+          {slugPage === 1 ? (
+            <div>
+              <Link href={`/genres/gamesgenre/${slug}-${next}`} passHref>
+                <button>next</button>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link href={`/genres/gamesgenre/${slug}-${previous}`} passHref>
+                <button>previous</button>
+              </Link>
+              <Link href={`/genres/gamesgenre/${slug}-${next}`} passHref>
+                <button>next</button>
+              </Link>
+            </div>
+          )}
         </main>
       </div>
     </Layout>

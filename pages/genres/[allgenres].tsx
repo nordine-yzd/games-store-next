@@ -28,12 +28,6 @@ export const getServerSideProps: GetServerSideProps = async (request) => {
   );
   const genre = await response.json();
 
-  const responseGamePerGenre = await fetch(
-    `http://videogame-api.fly.dev/games/genres/2ccc6572-bdde-6ed4-8843-25447ea40782?page=1`
-  );
-  const gamesPerGenre = await responseGamePerGenre.json();
-  // console.log(gamesPerGenre);
-
   // Pass data to the page via props
   return {
     props: {
@@ -63,7 +57,7 @@ const AllGenres: React.FC<{ genre: AllGenresTyped; slug: number }> = ({
                 return (
                   <Link
                     key={element.id}
-                    href={`/genres/gamesgenre/${element.id}`}
+                    href={`/genres/gamesgenre/${element.id}-1`}
                   >
                     <a>
                       <div
