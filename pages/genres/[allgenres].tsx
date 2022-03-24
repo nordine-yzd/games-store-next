@@ -61,18 +61,21 @@ const AllGenres: React.FC<{ genre: AllGenresTyped; slug: number }> = ({
             <div className={styles.grid}>
               {genre.genres.map((element) => {
                 return (
-                  // <Link key={element.id}  >
-                  //   <a>
-                  <div
+                  <Link
                     key={element.id}
-                    className={styles.card}
-                    onClick={() => setstate((state = false))}
+                    href={`/genres/gamesgenre/${element.id}`}
                   >
-                    <h2>{element.name}</h2>
-                    {console.log(element)}
-                  </div>
-                  //   </a>
-                  // </Link>
+                    <a>
+                      <div
+                        key={element.id}
+                        className={styles.card}
+                        onClick={() => setstate((state = false))}
+                      >
+                        <h2>{element.name}</h2>
+                        {console.log(element.id)}
+                      </div>
+                    </a>
+                  </Link>
                 );
               })}
             </div>
