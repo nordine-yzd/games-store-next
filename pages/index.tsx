@@ -18,7 +18,7 @@ const Home: NextPage = () => {
           </p> */}
 
           <div className={styles.grid}>
-            <Link href="/games/allgames">
+            <Link href="/games/1">
               <a className={styles.card}>
                 <h2>All Games &rarr;</h2>
               </a>

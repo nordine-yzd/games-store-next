@@ -3,28 +3,7 @@ import styles from "../../styles/Home.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { Layout } from "../../components/layout";
-
-// This gets called on every request
-export const getServerSideProps: GetServerSideProps = async (request) => {
-  const response = await fetch(`http://videogame-api.fly.dev/games?page=2`);
-  const joke = await response.json();
-  // console.log(request.params);
-  console.log("ici");
-
-  console.log(request.params);
-  console.log(typeof request.params);
-  const reqPa = await JSON.stringify(request.params);
-  const slug = JSON.stringify(request.params);
-  // const slug = reqParam.slice(12, reqParam.length - 2);
-  // console.log(reqParam);
-  // Pass data to the page via props
-  return {
-    props: {
-      joke: joke,
-      slug: { slug },
-    },
-  };
-};
+import React from "react";
 
 type AllGamesTyped = {
   games: {
@@ -43,24 +22,45 @@ type AllGamesTyped = {
     };
   }[];
 };
-type SlugTyped = {};
-const AllGames: React.FC<{ joke: AllGamesTyped; slug: SlugTyped }> = (
-  { joke },
-  { slug }
-) => {
-  console.log("here");
-  // console.log(joke);
 
-  console.log(slug);
-  console.log("after here");
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps = async (request) => {
+  const reqParam = JSON.stringify(request.params);
+  const slugString = reqParam.slice(13, reqParam.length - 2);
+  let slug: number = parseInt(slugString);
+
+  const reg = new RegExp("^[0-9]*$");
+  if (reg.test(slugString) == false) {
+    slug = 1;
+  }
+
+  const response = await fetch(
+    `http://videogame-api.fly.dev/games?page=${slug}`
+  );
+  const game = await response.json();
+
+  // Pass data to the page via props
+  return {
+    props: {
+      game: game,
+      slug: slug,
+    },
+  };
+};
+
+const AllGames: React.FC<{ game: AllGamesTyped; slug: number }> = ({
+  game,
+  slug,
+}) => {
+  const next = slug + 1;
+  const previous = slug - 1;
 
   return (
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
           <div className={styles.grid}>
-            {joke.games.map((element) => {
-              // console.log(element.cover);
+            {game.games.map((element) => {
               return element.cover ? (
                 <Link key={element.id} href="/">
                   <a>
@@ -93,12 +93,22 @@ const AllGames: React.FC<{ joke: AllGamesTyped; slug: SlugTyped }> = (
             })}
           </div>
         </main>
-        <Link href="/">
-          <button>previous</button>
-        </Link>
-        <Link href="/">
-          <button>next</button>
-        </Link>
+        {slug === 1 ? (
+          <div>
+            <Link href={`/games/${next}`} passHref>
+              <button>next</button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Link href={`/games/${previous}`} passHref>
+              <button>previous</button>
+            </Link>
+            <Link href={`/games/${next}`} passHref>
+              <button>next</button>
+            </Link>
+          </div>
+        )}
       </div>
     </Layout>
   );
