@@ -92,23 +92,23 @@ const AllGames: React.FC<{ game: AllGamesTyped; slug: number }> = ({
               );
             })}
           </div>
+          {slug === 1 ? (
+            <div>
+              <Link href={`/games/${next}`} passHref>
+                <button>next</button>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link href={`/games/${previous}`} passHref>
+                <button>previous</button>
+              </Link>
+              <Link href={`/games/${next}`} passHref>
+                <button>next</button>
+              </Link>
+            </div>
+          )}
         </main>
-        {slug === 1 ? (
-          <div>
-            <Link href={`/games/${next}`} passHref>
-              <button>next</button>
-            </Link>
-          </div>
-        ) : (
-          <div>
-            <Link href={`/games/${previous}`} passHref>
-              <button>previous</button>
-            </Link>
-            <Link href={`/games/${next}`} passHref>
-              <button>next</button>
-            </Link>
-          </div>
-        )}
       </div>
     </Layout>
   );

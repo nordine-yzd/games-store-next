@@ -24,13 +24,13 @@ const Home: NextPage = () => {
               </a>
             </Link>
 
-            <Link href="/platforms/allplatforms">
+            <Link href="/platforms/1">
               <a className={styles.card}>
                 <h2>All Platforms</h2>
               </a>
             </Link>
 
-            <Link href="/genres/allgenres">
+            <Link href="/genres/1">
               <a className={styles.card}>
                 <h2>All Genres</h2>
               </a>
