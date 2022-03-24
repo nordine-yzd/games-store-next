@@ -35,15 +35,8 @@ const Home: NextPage = () => {
                 <h2>All Genres</h2>
               </a>
             </Link>
-
-            <Link href="/genres/gamesgenre/gamesgenre">
-              <a className={styles.card}>
-                <h2>games per genre</h2>
-              </a>
-            </Link>
           </div>
         </main>
-        games-store-next/pages/genres/gamesgenre.tsx/[gamesgenre].tsx
         {/* <footer className={styles.footer}>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

@@ -59,8 +59,15 @@ const AllPlatforms: React.FC<{ games: AllPlatformsTyped; slug: number }> = ({
         <main className={styles.main}>
           <div className={styles.grid}>
             {games.platforms.map((element) => {
+              {
+                console.log(element);
+              }
+
               return element.logo ? (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/platforms/gamesplatforms/${element.id}-1`}
+                >
                   <a>
                     <div className={styles.card}>
                       <Image
@@ -73,7 +80,10 @@ const AllPlatforms: React.FC<{ games: AllPlatformsTyped; slug: number }> = ({
                   </a>
                 </Link>
               ) : (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/platforms/gamesplatforms/${element.id}-1`}
+                >
                   <a className={styles.card}>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>
