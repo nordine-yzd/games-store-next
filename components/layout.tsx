@@ -5,7 +5,7 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link href="/">Navbar</Link>
+        <Link href="/">Games Center </Link>
 
         <button
           className="navbar-toggler"
@@ -33,6 +33,16 @@ export const Layout: React.FC = ({ children }) => {
             <li className="nav-item">
               <Link href="/genres/allgenres">
                 <a className="nav-link active">All Genres</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/api/auth/login">
+                <a className="nav-link active">Login</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/api/auth/logout">
+                <a className="nav-link active">Logout</a>
               </Link>
             </li>
           </ul>
