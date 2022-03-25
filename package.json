@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.7.0",
     "@babel/core": "^7.17.8",
     "@types/mongodb": "^4.0.7",
     "dotenv": "^16.0.0",

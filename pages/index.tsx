@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+
 import Link from "next/link";
 import { Layout } from "../components/layout";
 import styles from "../styles/Home.module.css";
@@ -18,6 +17,12 @@ const Home: NextPage = () => {
           </p> */}
 
           <div className={styles.grid}>
+            <Link href="/api/auth/login">
+              <a className={styles.card}>
+                <h2>Login &rarr;</h2>
+              </a>
+            </Link>
+
             <Link href="/games/1">
               <a className={styles.card}>
                 <h2>All Games &rarr;</h2>
