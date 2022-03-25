@@ -17,12 +17,6 @@ const Home: NextPage = () => {
           </p> */}
 
           <div className={styles.grid}>
-            <Link href="/api/auth/login">
-              <a className={styles.card}>
-                <h2>Login &rarr;</h2>
-              </a>
-            </Link>
-
             <Link href="/games/1">
               <a className={styles.card}>
                 <h2>All Games &rarr;</h2>
