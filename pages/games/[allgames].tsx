@@ -62,7 +62,10 @@ const AllGames: React.FC<{ game: AllGamesTyped; slug: number }> = ({
           <div className={styles.grid}>
             {game.games.map((element) => {
               return element.cover ? (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/games/gamedetails/${element.id}`}
+                >
                   <a>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>
@@ -76,7 +79,10 @@ const AllGames: React.FC<{ game: AllGamesTyped; slug: number }> = ({
                   </a>
                 </Link>
               ) : (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/games/gamedetails/${element.id}`}
+                >
                   <a>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>

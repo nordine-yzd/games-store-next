@@ -36,9 +36,6 @@ export const getServerSideProps: GetServerSideProps = async (request) => {
   if (reg.test(SlugPageString) == false) {
     slugPage = 1;
   }
-  console.log(
-    `http://videogame-api.fly.dev/games/platforms/${slug}?page=${slugPage}`
-  );
 
   const response = await fetch(
     `http://videogame-api.fly.dev/games/platforms/${slug}?page=${slugPage}`
@@ -70,8 +67,13 @@ const AllGames: React.FC<{
         <main className={styles.main}>
           <div className={styles.grid}>
             {game.games.map((element) => {
+              console.log(element);
+
               return element.cover ? (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/games/gamedetails/${element.id}`}
+                >
                   <a>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>
@@ -85,7 +87,10 @@ const AllGames: React.FC<{
                   </a>
                 </Link>
               ) : (
-                <Link key={element.id} href="/">
+                <Link
+                  key={element.id}
+                  href={`/games/gamedetails/${element.id}`}
+                >
                   <a>
                     <div className={styles.card}>
                       <h2>{element.name}</h2>
